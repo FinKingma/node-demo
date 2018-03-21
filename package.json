@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "test": "mocha --timeout 10000 --exit"
+    "test": "JUNIT_REPORT_PATH=results/test-result.xml mocha --timeout 10000 --exit --colors --reporter mocha-jenkins-reporter"
   },
   "dependencies": {
     "body-parser": "^1.0.2",
@@ -15,7 +15,7 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "mocha": "^5.0.4",
-    "mocha-junit-reporter": "^1.13.0",
+    "mocha-jenkins-reporter": "0.3.10",
     "should": "^13.2.1",
     "supertest": "^3.0.0"
   }
