@@ -1,21 +1,27 @@
 
-var http = require('http');
-var fileSystem = require('fs');
+var express    = require('express');
+var app        = express();
+var bodyParser = require('body-parser');
 
-var server = http.createServer(function(req, resp){
-	fileSystem.readFile('./index.html', function(error, fileContent){
-		if(error){
-			resp.writeHead(500, {'Content-Type': 'text/plain'});
-			resp.end('Error');
-		}
-		else{
-			resp.writeHead(200, {'Content-Type': 'text/html'});
-			resp.write(fileContent);
-			resp.end();
-		}
-	});
+var presents     = require('./app/models/presents');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var port = process.env.PORT || 3000;
+
+var router = express.Router();
+
+router.get('/', function(req, res) {
+    res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-server.listen(8080);
+app.use('/api', router);
+app.use('/api/presents', presents);
 
+app.use(function(err, req, res, next) {
+  res.json({ message: 'helaas, dit is geen valide endpoint' });   
+});
 
+app.listen(port);
+console.log('Magic happens on port ' + port);
