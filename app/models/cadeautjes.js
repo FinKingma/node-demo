@@ -6,6 +6,10 @@ cadeautjes = [
     {
         id: 2,
         naam: 'appel'
+    },
+    {
+        id: 3,
+        naam: 'fiets'
     }
 ]
 
